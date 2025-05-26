@@ -12,10 +12,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userUid, setUserUid] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setLoading(false);
       setUserUid(user?.uid || null);
     });
     return () => unsubscribe();
@@ -40,6 +42,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const loginUser = await signInWithEmailAndPassword(auth, email, password);
       setUser(loginUser.user);
+      localStorage.setItem("uid", JSON.stringify(loginUser.user.uid));
+      setLoading(false);
       return loginUser.user;
     } catch (error) {
       console.log("login failed", error);
@@ -57,6 +61,7 @@ export const AuthProvider = ({ children }) => {
     userUid,
     login,
     logout,
+    loading,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,8 +1,13 @@
 "use client";
+import { auth } from "@/firebase";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import RoadmapForm from "../components/RoadmapForm/page";
 
 const Home = () => {
   //   console.log("hey i am lokesh");
+  const router = useRouter();
 
   const handleClick = async () => {
     const data = {
@@ -20,15 +25,14 @@ const Home = () => {
     console.log(resp);
   };
 
+  const handleLougout = async () => {
+    const logout = await auth.signOut();
+    localStorage.removeItem("uid");
+    router.push("/login");
+  };
   return (
     <div>
-      <h1 className="text-xl">page based routing in next.js</h1>
-      <ul>
-        <li>File based routing </li>
-        <li>router from next/navigation </li>
-        <li>Optimized rendering </li>
-      </ul>
-      <button onClick={handleClick}>click me</button>
+      <RoadmapForm />
     </div>
   );
 };

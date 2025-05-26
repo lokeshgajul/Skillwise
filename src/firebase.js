@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: process.envapiKey,
-  authDomain: process.envauthDomain,
-  projectId: process.envprojectId,
-  storageBucket: process.envstorageBucket,
-  messagingSenderId: process.envmessagingSenderId,
-  appId: process.envappId,
-  measurementId: process.envmeasurementId,
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
+  measurementId: process.env.measurementId,
 };
 
 // Initialize Firebase

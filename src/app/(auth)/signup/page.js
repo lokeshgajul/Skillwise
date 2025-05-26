@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/app/context/AuthContext";
+import Link from "next/link";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function SignupForm() {
     e.preventDefault();
     try {
       await signUp(email, password);
-      router.push("/auth/login");
+      router.push("/login");
     } catch (err) {
       setError(err.message);
     }
@@ -57,6 +58,13 @@ export default function SignupForm() {
           Sign Up
         </button>
         {error && <p className="text-red-500 text-sm">{error}</p>}
+
+        <div className="flex justify-end items-end gap-2">
+          <span className="text-blue-600">Already have an account?</span>
+          <span>
+            <Link href="/login">Log In</Link>
+          </span>
+        </div>
       </form>
     </div>
   );
