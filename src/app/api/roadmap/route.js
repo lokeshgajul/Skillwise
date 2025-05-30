@@ -1,8 +1,11 @@
+import connectDb from "@/app/db/connectionDB.js";
+import Roadmap from "../../db/schema/Roadmap.js";
 import genAI from "@/app/lib/gemini";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
+    await connectDb();
     const { goal } = await request.json();
     const prompt = `Create a clear, structured, and user-friendly step-by-step learning roadmap to become a ${goal}. 
                     Organize the output into phases and milestones. 
@@ -19,6 +22,15 @@ export async function POST(request) {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.candidates[0].content.parts[0].text;
+
+    const newRoadmap = new Roadmap({
+      goal,
+      roadmap: text,
+      createdAt: new Date(),
+    });
+    await newRoadmap.save();
+    console.log("Roadmap saved to database:", Roadmap);
+
     return new NextResponse(JSON.stringify({ roadmap: text }), {
       status: 200,
       message: "Roadmap generated successfully",

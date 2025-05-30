@@ -1,3 +1,4 @@
+"use client";
 import Home from "@/app/home/page";
 import Login from "@/app/(auth)/login/page";
 import { useRouter } from "next/navigation";

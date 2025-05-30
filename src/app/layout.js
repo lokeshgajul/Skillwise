@@ -11,9 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-r from-blue-100 to-cyan-100 ">
-        <Navbar />
-        <AuthProvider>{children}</AuthProvider>
+      <body className="gradient-bg">
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

@@ -2,3 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* background: linear-gradient(to left, #fae9fa, #cbf1f4); */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+    animation-delay: 1s;
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+.skeleton {
+  background-color: #f6f4f4;
+  border-radius: 8px;
+  display: flex;
+
+}
+
+
+
+
+
